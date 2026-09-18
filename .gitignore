@@ -1,0 +1,26 @@
+# Arquivos compilados do Java
+*.class
+
+# Arquivos de log
+*.log
+
+# Diretório de build do Maven
+target/
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# IDEs (IntelliJ, Eclipse, VS Code)
+.idea/
+*.iml
+*.iws
+.vscode/
+.classpath
+.project
+.settings/
+
+# Arquivos de Sistema Operacional (Mac e Windows)
+.DS_Store
+Thumbs.db
+
+# Variáveis de Ambiente (IMPORTANTE! Isso protege suas senhas e chaves de API)
+.env

@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import br.com.casamento.enums.PaymentStatus;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -38,6 +39,9 @@ public class Payment {
     private String guestEmail;
 
     private BigDecimal amount;
+
+    @Column(length = 500)
+    private String message;
 
     private String gatewayOrderId;
 

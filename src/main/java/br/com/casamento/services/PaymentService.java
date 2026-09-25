@@ -1,8 +1,11 @@
 package br.com.casamento.services;
 
+import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
+import com.digitalsanctuary.cf.turnstile.service.TurnstileValidationService;
 import com.mercadopago.exceptions.MPApiException;
 import com.mercadopago.exceptions.MPException;
 import com.mercadopago.resources.order.Order;
@@ -23,9 +26,16 @@ public class PaymentService {
     private final PaymentRepository paymentRepository;
     private final GiftRepository giftRepository;
     private final MercadoPagoService mercadoPagoService;
+    private final TurnstileValidationService turnstileValidationService;
 
     @Transactional
     public PaymentResponse processPayment(CreatePaymentRequest request) {
+
+        // 0. Valida o CAPTCHA do Cloudflare antes de qualquer coisa
+        if (!turnstileValidationService.validateTurnstileResponse(request.captchaToken())) {
+            throw new ResponseStatusException(HttpStatusCode.valueOf(403), "Verificação de segurança falhou. Tente novamente.");
+        }
+
 
         // 1. Busca o presente
         Gift gift = giftRepository.findById(request.giftId())
@@ -47,6 +57,10 @@ public class PaymentService {
             null,                      // checkoutUrl (preenchido depois)
             PaymentStatus.PENDING
         );
+
+        if(request.message() != null && !request.message().isBlank()) {
+            payment.setMessage(request.message());
+        }
 
         // 4. Salva para gerar o id e o externalReference
         payment = paymentRepository.save(payment);

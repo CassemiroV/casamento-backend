@@ -15,7 +15,10 @@ import lombok.RequiredArgsConstructor;
 
 @CrossOrigin(origins = {
     "http://localhost:5173",
-    "http://localhost:5174"
+    "http://localhost:5174",
+    "http://viniciuscassemiro.com.br",
+    "https://viniciuscassemiro.com.br",
+    "https://www.viniciuscassemiro.com.br"
 })
 @RestController
 @RequestMapping ("/gifts")

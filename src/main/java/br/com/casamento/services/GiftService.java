@@ -15,6 +15,8 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class GiftService {
+
+    
     private final GiftRepository giftRepository;
 
     public List<GiftGroupResponse> listGrouped() {

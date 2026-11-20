@@ -1,6 +1,7 @@
 package br.com.casamento.entities;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -44,6 +45,12 @@ public class Payment {
     private String message;
 
     private String gatewayOrderId;
+
+    private String gatewayStatus;
+
+    private String gatewayStatusDetail;
+
+    private Instant gatewayCheckedAt;
 
     private String externalReference;
 

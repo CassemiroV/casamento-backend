@@ -12,6 +12,6 @@ public record CreatePaymentRequest(
     @NotBlank @Size(max = 50) String guestName, 
     @NotBlank @Email @Size(max = 100) String guestEmail,
     @Size(max = 500) String message,
-    @NotNull String captchaToken) {
+    @NotBlank String captchaToken) {
     
 }
